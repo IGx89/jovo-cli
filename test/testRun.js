@@ -78,9 +78,7 @@ describe('run', function() {
             fullData += data.toString();
         });
         childRun.on('exit', () => {
-            setTimeout(() => {
             done();
-            }, 1000);
         });
 
         setTimeout(() => {
@@ -105,9 +103,7 @@ describe('run', function() {
             fullData += data.toString();
         });
         childRun.on('exit', () => {
-            setTimeout(() => {
             done();
-            }, 1000);
         });
 
         setTimeout(() => {
