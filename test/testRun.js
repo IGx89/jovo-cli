@@ -102,6 +102,9 @@ describe('run', function() {
             cwd: projectFolder,
         });
         let fullData = '';
+        child.stderr.on('data', (data) => {
+            assert.ok(false, data.toString());
+        });
         child.stdout.on('data', (data) => {
             fullData += data.toString();
         });
