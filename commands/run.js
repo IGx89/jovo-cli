@@ -138,16 +138,9 @@ module.exports = function(vorpal) {
                 parameters.push('--jovo-webhook');
             }
             const ls = spawn(command, parameters, {windowsVerbatimArguments: true, stdio: 'inherit', cwd: srcDir || process.cwd()});
-            ls.on('data', (data) => {
-                console.log(`stdout: ${data}`);
-            });
 
-            ls.on('data', (data) => {
-                console.log(`stderr: ${data}`);
-            });
-
-            ls.on('close', (code) => {
-                // console.log(`${code}`);
+            process.on('exit', () => {
+                ls.kill();
             });
         });
 };
