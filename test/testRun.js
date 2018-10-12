@@ -93,13 +93,12 @@ describe('run', function() {
             done();
         }, 8000);
     });
-    it('jovo run --webhook-standalone', function(done) {
+    it('jovo run', function(done) {
         this.timeout(200000);
         const projectName = 'helloworldRun';
         const projectFolder = tmpTestfolder + path.sep + projectName;
         let child = spawn('node', ['./../../index.js',
-            'run',
-            '--webhook-standalone'], {
+            'run'], {
             cwd: projectFolder,
         });
         let fullData = '';
