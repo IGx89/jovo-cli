@@ -33,7 +33,7 @@ let deleteFolderRecursive = function(path) {
 
 describe('run', function() {
     before(function(done) {
-        this.timeout(25000);
+        this.timeout(30000);
 
         deleteFolderRecursive(tmpTestfolder);
         if (!fs.existsSync(tmpTestfolder)) {
