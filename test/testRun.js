@@ -78,19 +78,24 @@ describe('run', function() {
             cwd: projectFolder,
         });
         let fullData = '';
+        child.stderr.on('data', (data) => {
+            assert.ok(false, data.toString());
+        });
         child.stdout.on('data', (data) => {
             fullData += data.toString();
         });
+        child.on('exit', () => {
+            done();
+        });
 
         setTimeout(() => {
-            child.kill();
             const validation =
                 // If proxy has already being run a configuration exists
                 fullData.indexOf('Example server listening on port 3000!') > -1 ||
                 // If proxy haven't run, one is created
                 fullData.indexOf('info: CONFIG      No configuration. Creating one') > -1;
             assert.ok(validation);
-            done();
+            child.kill();
         }, 8000);
     });
     it('jovo run', function(done) {
@@ -108,12 +113,14 @@ describe('run', function() {
         child.stdout.on('data', (data) => {
             fullData += data.toString();
         });
+        child.on('exit', () => {
+            done();
+        });
 
         setTimeout(() => {
-            child.kill();
             expect(fullData).to.contain('Example server listening on port 3000!');
-            done();
-        }, 10000);
+            child.kill();
+        }, 8000);
     });
 
     after(function(done) {
